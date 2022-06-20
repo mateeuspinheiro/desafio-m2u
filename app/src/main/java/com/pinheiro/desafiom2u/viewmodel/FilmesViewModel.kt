@@ -27,6 +27,7 @@ class FilmesViewModel(private val dispatcher: CoroutineDispatcher = Dispatchers.
     var listaFilme: LiveData<FilmesDTO> = _listarFilmesExibicao
     var listaFilmeExibicao : LiveData<FilmesDTO> = _listarFilmesLancamento
 
+
     fun listarFilmesExibicao() {
 
         viewModelScope.launch(dispatcher) {
@@ -64,6 +65,58 @@ class FilmesViewModel(private val dispatcher: CoroutineDispatcher = Dispatchers.
                     if (response.isSuccessful) {
                         response.body()?.let { list ->
                             _listarFilmesEmBreve.postValue(list)
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<FilmesDTO>, t: Throwable) {
+                    Log.e(FilmesViewModel::class.java.name, t.toString())
+                }
+
+            })
+        }
+    }
+
+    private val _listarFilmesPopulares: MutableLiveData<FilmesDTO> = MutableLiveData()
+    var listarFilmesPopular: LiveData<FilmesDTO> = _listarFilmesPopulares
+
+    fun listarFilmesPopular() {
+
+        viewModelScope.launch(dispatcher) {
+            repository.listarFilmesPopular().enqueue(object : Callback<FilmesDTO> {
+                override fun onResponse(
+                    call: Call<FilmesDTO>,
+                    response: Response<FilmesDTO>
+                ) {
+                    if (response.isSuccessful) {
+                        response.body()?.let { list ->
+                            _listarFilmesPopulares.postValue(list)
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<FilmesDTO>, t: Throwable) {
+                    Log.e(FilmesViewModel::class.java.name, t.toString())
+                }
+
+            })
+        }
+    }
+
+    private val _listarFilmesMelhores: MutableLiveData<FilmesDTO> = MutableLiveData()
+    var listarFilmesRated: LiveData<FilmesDTO> = _listarFilmesMelhores
+
+    fun listarFilmesRated() {
+
+        viewModelScope.launch(dispatcher) {
+            repository.listarFilmesRated().enqueue(object : Callback<FilmesDTO> {
+                override fun onResponse(
+                    call: Call<FilmesDTO>,
+                    response: Response<FilmesDTO>
+                ) {
+                    if (response.isSuccessful) {
+                        response.body()?.let { list ->
+                            _listarFilmesMelhores.postValue(list)
                         }
                     }
                 }

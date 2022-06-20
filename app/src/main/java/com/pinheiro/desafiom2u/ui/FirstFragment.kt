@@ -86,6 +86,85 @@ class FirstFragment : Fragment() {
                 }
             }
         }
+
+        binding.recyclerMaisPopulares.layoutManager =
+            LinearLayoutManager(view.context, LinearLayoutManager.HORIZONTAL, false)
+
+        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+            viewModel.listarFilmesPopular()
+        }
+        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
+            viewModel.listarFilmesPopular.observe(viewLifecycleOwner) {
+                it.results?.let { results ->
+                    binding.recyclerMaisPopulares.adapter =
+                        FilmesAdapter(
+                            dataSet = results,
+                            filmeListener = object : FilmesListener {
+                                override fun onClickFilmeListener(id: Int) {
+                                    val bundle = bundleOf("id" to id)
+                                    findNavController().navigate(
+                                        R.id.action_FirstFragment_to_SecondFragment,
+                                        bundle
+                                    )
+                                }
+                            }
+                        )
+                }
+            }
+        }
+
+        binding.recyclerMaisPopulares.layoutManager =
+            LinearLayoutManager(view.context, LinearLayoutManager.HORIZONTAL, false)
+
+        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+            viewModel.listarFilmesPopular()
+        }
+        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
+            viewModel.listarFilmesPopular.observe(viewLifecycleOwner) {
+                it.results?.let { results ->
+                    binding.recyclerMaisPopulares.adapter =
+                        FilmesAdapter(
+                            dataSet = results,
+                            filmeListener = object : FilmesListener {
+                                override fun onClickFilmeListener(id: Int) {
+                                    val bundle = bundleOf("id" to id)
+                                    findNavController().navigate(
+                                        R.id.action_FirstFragment_to_SecondFragment,
+                                        bundle
+                                    )
+                                }
+                            }
+                        )
+                }
+            }
+        }
+
+        binding.recyclerMelhoresAvaliados.layoutManager =
+            LinearLayoutManager(view.context, LinearLayoutManager.HORIZONTAL, false)
+
+        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+            viewModel.listarFilmesRated()
+        }
+        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
+            viewModel.listarFilmesRated.observe(viewLifecycleOwner) {
+                it.results?.let { results ->
+                    binding.recyclerMelhoresAvaliados.adapter =
+                        FilmesAdapter(
+                            dataSet = results,
+                            filmeListener = object : FilmesListener {
+                                override fun onClickFilmeListener(id: Int) {
+                                    val bundle = bundleOf("id" to id)
+                                    findNavController().navigate(
+                                        R.id.action_FirstFragment_to_SecondFragment,
+                                        bundle
+                                    )
+                                }
+                            }
+                        )
+                }
+            }
+        }
+
     }
 
 

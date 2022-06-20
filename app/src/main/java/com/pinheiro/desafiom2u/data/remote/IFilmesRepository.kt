@@ -4,6 +4,7 @@ import com.pinheiro.desafiom2u.data.remote.dto.FilmesDTO
 import com.pinheiro.desafiom2u.data.remote.dto.Result
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 interface IFilmesRepository {
 
@@ -20,6 +21,6 @@ interface IFilmesRepository {
     fun listarFilmesPopular() : Call<FilmesDTO>
 
     @GET("movie/{movie_id}/similar?api_key=d5ae671e4f276368156fb42e8fdb4b47&language=pt-BR&page=1")
-    fun likeFilmes() : Call<FilmesDTO>
+    fun likeFilmes(@Path("movie_id")id: Int) : Call<FilmesDTO>
 
 }

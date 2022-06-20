@@ -19,7 +19,7 @@
             android:name=".ui.MainActivity"
             android:exported="false"
             android:label="@string/title_activity_main"
-            android:theme="@style/Theme.DesafioM2U.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".SplashScreenActivity"
             android:exported="true"

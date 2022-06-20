@@ -9,21 +9,21 @@ class FilmesRepository(private val retrofitClient: RetrofitClient) : IFilmesRepo
     override fun listarFilmesExbibicao(): Call<FilmesDTO> =
         retrofitClient.getInstance().getFilmesAPI().listarFilmesExbibicao()
 
-    override fun listarFilmesRated() {
-        TODO("Not yet implemented")
-    }
+    override fun listarFilmesRated(): Call<FilmesDTO> =
+        retrofitClient.getInstance().getFilmesAPI().listarFilmesRated()
+
 
     override fun listarFilmesLancamentos() : Call<FilmesDTO> =
         retrofitClient.getInstance().getFilmesAPI().listarFilmesLancamentos()
 
 
-    override fun listarFilmesPopular() {
-        TODO("Not yet implemented")
-    }
+    override fun listarFilmesPopular(): Call<FilmesDTO> =
+        retrofitClient.getInstance().getFilmesAPI().listarFilmesPopular()
 
-    override fun likeFilmes() {
-        TODO("Not yet implemented")
-    }
+
+    override fun likeFilmes(id: Int): Call<FilmesDTO> =
+        retrofitClient.getInstance().getFilmesAPI().likeFilmes(id)
+
 
 
 }
