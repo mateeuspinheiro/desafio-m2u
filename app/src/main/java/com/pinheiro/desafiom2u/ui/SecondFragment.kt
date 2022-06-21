@@ -5,15 +5,24 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.pinheiro.desafiom2u.R
 import com.pinheiro.desafiom2u.databinding.FragmentSecondBinding
+import com.pinheiro.desafiom2u.ui.adapter.FilmesAdapter
+import com.pinheiro.desafiom2u.ui.adapter.FilmesListener
+import com.pinheiro.desafiom2u.viewmodel.DetailsFilmeViewModel
+import com.pinheiro.desafiom2u.viewmodel.FilmesViewModel
 
 
 class SecondFragment : Fragment() {
 
     private var _binding: FragmentSecondBinding? = null
     private val binding get() = _binding!!
+    private val viewModel: DetailsFilmeViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,8 +36,32 @@ class SecondFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val id = arguments?.getInt("id")
-        //TODO CARREGAR DETALHES DO FILME (COM O ID)
+
+        val idDetalhes = arguments?.getInt("id")
+
+
+        binding.recyclerMaisComoEste.layoutManager =
+            LinearLayoutManager(view.context, LinearLayoutManager.HORIZONTAL, false)
+
+        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+            viewModel.listarMaisComoEsse(id)
+        }
+        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
+            viewModel.listarMaisComoEsse.observe(viewLifecycleOwner) {
+                it.results?.let { results ->
+                    binding.recyclerMaisComoEste.adapter =
+                        FilmesAdapter(
+                            dataSet = results,
+                            filmeListener = object : FilmesListener {
+                                override fun onClickFilmeListener(id: Int) {}
+                            }
+                        )
+                }
+            }
+        }
+
+
+
     }
 
     override fun onDestroyView() {

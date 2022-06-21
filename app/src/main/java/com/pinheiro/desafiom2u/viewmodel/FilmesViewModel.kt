@@ -8,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import com.pinheiro.desafiom2u.data.remote.FilmesRepository
 import com.pinheiro.desafiom2u.data.remote.IFilmesRepository
 import com.pinheiro.desafiom2u.data.remote.dto.FilmesDTO
-import com.pinheiro.desafiom2u.data.remote.dto.Result
 import com.pinheiro.desafiom2u.data.remote.dto.RetrofitClient
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -20,7 +19,7 @@ import retrofit2.Response
 
 class FilmesViewModel(private val dispatcher: CoroutineDispatcher = Dispatchers.IO) : ViewModel() {
 
-    private val repository: IFilmesRepository = FilmesRepository(RetrofitClient())
+    private val repository : IFilmesRepository = FilmesRepository(RetrofitClient())
 
     private val _listarFilmesExibicao: MutableLiveData<FilmesDTO> = MutableLiveData()
     private val _listarFilmesLancamento: MutableLiveData<FilmesDTO> = MutableLiveData()
@@ -128,6 +127,7 @@ class FilmesViewModel(private val dispatcher: CoroutineDispatcher = Dispatchers.
             })
         }
     }
+
 
 
 }

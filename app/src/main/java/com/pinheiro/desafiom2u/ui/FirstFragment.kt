@@ -45,7 +45,7 @@ class FirstFragment : Fragment() {
             viewModel.listaFilme.observe(viewLifecycleOwner) {
                 it.results?.let { results ->
                     binding.recyclerFilmes.adapter =
-                        FilmesAdapter(
+                    FilmesAdapter(
                             dataSet = results,
                             filmeListener = object : FilmesListener {
                                 override fun onClickFilmeListener(id: Int) {
