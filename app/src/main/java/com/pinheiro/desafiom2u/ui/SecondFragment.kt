@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -37,14 +38,14 @@ class SecondFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val idDetalhes = arguments?.getInt("id")
+        val idDetalhes = arguments?.getInt("id") ?: 0
 
 
         binding.recyclerMaisComoEste.layoutManager =
             LinearLayoutManager(view.context, LinearLayoutManager.HORIZONTAL, false)
 
         viewLifecycleOwner.lifecycleScope.launchWhenCreated {
-            viewModel.listarMaisComoEsse(id)
+            viewModel.listarMaisComoEsse(idDetalhes)
         }
         viewLifecycleOwner.lifecycleScope.launchWhenResumed {
             viewModel.listarMaisComoEsse.observe(viewLifecycleOwner) {
@@ -60,7 +61,25 @@ class SecondFragment : Fragment() {
             }
         }
 
+        binding.recyclerComentarios.layoutManager =
+            LinearLayoutManager(view.context, LinearLayoutManager.VERTICAL, false)
 
+        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+            viewModel.listarComentariosFilmes(idDetalhes)
+        }
+        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
+            viewModel.listarComentariosFilmes.observe(viewLifecycleOwner) {
+                it.results?.let { results ->
+                    binding.recyclerComentarios.adapter =
+                        FilmesAdapter(
+                            dataSet = results,
+                            filmeListener = object : FilmesListener {
+                                override fun onClickFilmeListener(id: Int) {}
+                            }
+                        )
+                }
+            }
+        }
 
     }
 

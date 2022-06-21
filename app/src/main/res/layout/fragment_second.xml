@@ -12,32 +12,33 @@
         android:id="@+id/txtComentarios"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="400dp"
         android:fontFamily="sans-serif-light"
         android:text="Comentários"
         android:textColor="@color/white"
         android:textSize="24dp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.058"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/txtViewSinopse"
+        app:layout_constraintVertical_bias="0.046" />
 
     <TextView
         android:id="@+id/txtSinopse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="240dp"
         android:fontFamily="sans-serif-light"
         android:text="Sinopse"
         android:textColor="@color/white"
         android:textSize="24dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/txtComentarios"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.048"
+        app:layout_constraintHorizontal_bias="0.049"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imagemFilmeFundo"
+        app:layout_constraintVertical_bias="0.024" />
 
     <TextView
         android:id="@+id/txtMaisComoEsse"
@@ -48,20 +49,49 @@
         android:textColor="@color/white"
         android:textSize="24dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerMaisComoEste"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.067"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtComentarios" />
+        app:layout_constraintTop_toBottomOf="@+id/recyclerComentarios" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerMaisComoEste"
-        android:layout_width="408dp"
-        android:layout_height="226dp"
+        android:layout_width="391dp"
+        android:layout_height="183dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="618dp"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toBottomOf="@+id/txtMaisComoEsse" />
+
+    <ImageView
+        android:id="@+id/imagemFilmeFundo"
+        android:layout_width="405dp"
+        android:layout_height="238dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/txtViewSinopse"
+        android:layout_width="391dp"
+        android:layout_height="83dp"
+        android:layout_marginTop="8dp"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtSinopse" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerComentarios"
+        android:layout_width="382dp"
+        android:layout_height="149dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.448"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtComentarios" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

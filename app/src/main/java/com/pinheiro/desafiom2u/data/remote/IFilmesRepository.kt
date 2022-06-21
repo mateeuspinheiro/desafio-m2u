@@ -23,4 +23,10 @@ interface IFilmesRepository {
     @GET("movie/{movie_id}/similar?api_key=d5ae671e4f276368156fb42e8fdb4b47&language=pt-BR&page=1")
     fun likeFilmes(@Path("movie_id")id: Int) : Call<FilmesDTO>
 
+    @GET("movie/{movie_id}/similar?api_key=d5ae671e4f276368156fb42e8fdb4b47&language=pt-BR&page=1")
+    fun listarImagensFilmes(@Path("movie_id")id: Int) : Call<FilmesDTO>
+
+    @GET("movie/{movie_id}/reviews?api_key=d5ae671e4f276368156fb42e8fdb4b47&language=pt-BR&page=1")
+    fun listarComentariosFilmes(@Path("movie_id")id: Int) : Call<FilmesDTO>
+
 }

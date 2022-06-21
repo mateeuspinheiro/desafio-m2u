@@ -24,6 +24,10 @@ class FilmesRepository(private val retrofitClient: RetrofitClient) : IFilmesRepo
     override fun likeFilmes(id: Int): Call<FilmesDTO> =
         retrofitClient.getInstance().getFilmesAPI().likeFilmes(id)
 
+    override fun listarImagensFilmes(id: Int): Call<FilmesDTO> =
+        retrofitClient.getInstance().getFilmesAPI().likeFilmes(id)
 
+    override fun listarComentariosFilmes(id: Int): Call<FilmesDTO> =
+        retrofitClient.getInstance().getFilmesAPI().likeFilmes(id)
 
 }

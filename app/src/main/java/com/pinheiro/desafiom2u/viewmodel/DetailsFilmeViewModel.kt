@@ -46,4 +46,56 @@ class DetailsFilmeViewModel(private val dispatcher: CoroutineDispatcher = Dispat
                 })
             }
     }
+
+    private val _listarImagensFilmes: MutableLiveData<FilmesDTO> = MutableLiveData()
+    var listarImagensFilmes: LiveData<FilmesDTO> = _listarImagensFilmes
+
+    fun listarImagensFilmes(id: Int) {
+
+        viewModelScope.launch(dispatcher) {
+            repository.listarImagensFilmes(id).enqueue(object : Callback<FilmesDTO> {
+                override fun onResponse(
+                    call: Call<FilmesDTO>,
+                    response: Response<FilmesDTO>
+                ) {
+                    if (response.isSuccessful) {
+                        response.body()?.let { list ->
+                            _listarImagensFilmes.postValue(list)
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<FilmesDTO>, t: Throwable) {
+                    Log.e(FilmesViewModel::class.java.name, t.toString())
+                }
+
+            })
+        }
+    }
+
+    private val _listarComentariosFilmes: MutableLiveData<FilmesDTO> = MutableLiveData()
+    var listarComentariosFilmes: LiveData<FilmesDTO> = _listarComentariosFilmes
+
+    fun listarComentariosFilmes(id: Int) {
+
+        viewModelScope.launch(dispatcher) {
+            repository.listarImagensFilmes(id).enqueue(object : Callback<FilmesDTO> {
+                override fun onResponse(
+                    call: Call<FilmesDTO>,
+                    response: Response<FilmesDTO>
+                ) {
+                    if (response.isSuccessful) {
+                        response.body()?.let { list ->
+                            _listarComentariosFilmes.postValue(list)
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<FilmesDTO>, t: Throwable) {
+                    Log.e(FilmesViewModel::class.java.name, t.toString())
+                }
+
+            })
+        }
+    }
 }
